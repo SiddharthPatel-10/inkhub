@@ -6,7 +6,8 @@ const dotenv = require("dotenv");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const database = require("./config/db");
-const userModel = require("./models/User");
+const productRoutes = require('./routes/productRoutes');
+const Product = require("./models/Product");
 
 // Load environment variables
 dotenv.config();
@@ -30,7 +31,18 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Define routes
 app.use("/api/users", require("./routes/userRoutes"));
-// app.use("/api/products", require("./routes/productRoutes"));
+app.use("/api/products", require("./routes/productRoutes"));
+
+// Render the product page
+app.get('/products', async (req, res) => {
+  try {
+    const products = await Product.find({});
+    res.render('products', { products });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server error');
+  }
+});
 
 // Route for index page
 app.get("/", (req, res) => {

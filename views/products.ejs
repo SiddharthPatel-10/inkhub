@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products</title>
+  <!-- Include Tailwind CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .product-image {
+      background-size: cover;
+      background-position: center;
+      height: 200px;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans">
+  <header class="bg-blue-600 text-white text-center py-6 shadow-lg">
+    <h1 class="text-4xl font-bold tracking-wider">Our Products</h1>
+  </header>
+  <main class="container mx-auto py-12 px-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <% products.forEach(product => { %>
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
+          <div class="product-image" style="background-image: url('<%= product.imageUrl %>')"></div>
+          <div class="p-6">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4"><%= product.name %></h2>
+            <p class="text-gray-600 mb-2"><strong>Price:</strong> ₹<%= product.price %></p>
+            <p class="text-gray-600 mb-2"><strong>Category:</strong> <%= product.category %></p>
+            <p class="text-gray-600 mb-4"><strong>Description:</strong> <%= product.description %></p>
+            <p class="text-gray-600 mb-2"><strong>Available:</strong> <%= product.isAvailable ? 'Yes' : 'No' %></p>
+            <p class="text-gray-600 mb-2"><strong>Discount:</strong> <%= product.discount %>%</p>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </main>
+</body>
+</html>

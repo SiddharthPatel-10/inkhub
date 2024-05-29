@@ -1,5 +1,4 @@
-// backend/models/Product.js
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const ProductSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -9,6 +8,7 @@ const ProductSchema = new mongoose.Schema({
   isAvailable: { type: Boolean, default: true },
   discount: { type: Number, default: 0 },
   createdAt: { type: Date, default: Date.now },
+  imageUrl: { type: String, required: true }  // Add this field
 });
 
-module.exports = mongoose.model("Product", ProductSchema);
+module.exports = mongoose.model('Product', ProductSchema);
