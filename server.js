@@ -6,7 +6,7 @@ const dotenv = require("dotenv");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const database = require("./config/db");
-const productRoutes = require('./routes/productRoutes');
+const productRoutes = require("./routes/productRoutes");
 const Product = require("./models/Product");
 
 // Load environment variables
@@ -34,13 +34,13 @@ app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/products", require("./routes/productRoutes"));
 
 // Render the product page
-app.get('/products', async (req, res) => {
+app.get("/products", async (req, res) => {
   try {
     const products = await Product.find({});
-    res.render('products', { products });
+    res.render("products", { products });
   } catch (error) {
     console.error(error);
-    res.status(500).send('Server error');
+    res.status(500).send("Server error");
   }
 });
 
@@ -48,6 +48,10 @@ app.get('/products', async (req, res) => {
 app.get("/", (req, res) => {
   res.render("index");
 });
+
+// Mount the admin routes
+const adminRoutes = require("./routes/adminRoutes");
+app.use("/admin", adminRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 3000;

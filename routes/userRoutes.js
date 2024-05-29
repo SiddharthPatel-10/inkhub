@@ -97,6 +97,7 @@ router.post("/login", async (req, res) => {
      // Debug: Check stored password hash
      console.log('Stored password hash:', user.password);
      
+     
     // Compare provided password with stored hashed password
     const isMatch = await bcrypt.compare(password, user.password);
 
@@ -123,6 +124,7 @@ router.post("/login", async (req, res) => {
       user,
       message: "User logged in successfully",
     });
+    
   } catch (error) {
     console.error(error);
     return res.status(500).json({
