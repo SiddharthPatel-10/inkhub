@@ -10,25 +10,9 @@ const UserSchema = new mongoose.Schema({
   isAdmin: { type: Boolean, default: false },
 });
 
+// Method to compare password
 UserSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
-
-UserSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) {
-    next();
-  }
-
-  // Debugging: Log the password before hashing
-  console.log('Password before hashing:', this.password);
-
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
-
-  // Debugging: Log the password after hashing
-  console.log('Password after hashing:', this.password);
-
-  next();
-});
 
 module.exports = mongoose.model('User', UserSchema);
