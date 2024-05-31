@@ -52,9 +52,9 @@ app.get("/products", async (req, res) => {
 const adminRoutes = require("./routes/adminRoutes");
 app.use("/api/admin", adminRoutes);
 
-// contacts Route
-const contactRoutes = require('./routes/contactRoutes');
-app.use('/', contactRoutes);
+// Admin-contacts Route
+const contactRoutes = require("./routes/contactRoutes");
+app.use("/", contactRoutes);
 
 app.get("/login-signup", (req, res) => {
   res.render("login-signup");
@@ -70,9 +70,6 @@ app.get("/", (req, res) => {
   res.render("index", { user });
 });
 
-
-
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
