@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 exports.signup = async (req, res) => {
   try {
     // Destructure fields from the request body
-    const { name, email, password, confirmPassword } = req.body;
+    const { name, email, password, confirmPassword, role} = req.body;
 
     // Check if all details are present
     if (!name || !email || !password || !confirmPassword) {
@@ -41,10 +41,11 @@ exports.signup = async (req, res) => {
       name,
       email,
       password: hashedPassword,
+      role,
     });
 
     // Generate JWT token
-    const payload = { user: { id: user.id } };
+    const payload = { user: { id: user.id, role: user.role} };
     jwt.sign(
       payload,
       process.env.JWT_SECRET,
@@ -109,7 +110,7 @@ exports.login = async (req, res) => {
     }
 
     // Generate JWT token
-    const payload = { user: { id: user.id, email: user.email } };
+    const payload = { user: { id: user.id, email: user.email, role: user.role } };
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: "24h",
     });

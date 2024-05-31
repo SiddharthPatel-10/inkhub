@@ -7,12 +7,15 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   // confirmPassword: { type: String, required: true },
-  isAdmin: { type: Boolean, default: false },
+  role: { type: String, enum: ['user', 'admin'], default: 'user' },
 });
 
 // Method to compare password
 UserSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
+
+
+
 
 module.exports = mongoose.model('User', UserSchema);
