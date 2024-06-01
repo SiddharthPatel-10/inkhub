@@ -60,6 +60,7 @@ app.get("/login-signup", (req, res) => {
   res.render("login-signup");
 });
 
+
 // Mock user data
 const user = {
   isAuthenticated: true,

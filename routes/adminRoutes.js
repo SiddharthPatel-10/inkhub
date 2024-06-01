@@ -5,7 +5,7 @@ const Contact = require("../models/Contact");
 const authMiddleware = require('../middlewares/authMiddleware');
 
 // Protect admin routes
-router.use(authMiddleware);
+// router.use(authMiddleware);
 
 //getAllUser
 const { getAllUsers } = require("../controllers/adminController");
@@ -39,9 +39,9 @@ router.post("/create-product", async (req, res) => {
 });
 
 // Admin panel
-router.get("/", (req, res) => {
+router.get("/create-product", (req, res) => {
   const success = req.query.success === "true";
-  res.render("admin", { success });
+  res.render("createProduct", { success });
 });
 
 // getAllContacts
